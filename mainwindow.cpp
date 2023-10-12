@@ -11,9 +11,21 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    // Подключаем картографию
+    Marble::MarbleWidget *mapWidget = new Marble::MarbleWidget;
+    mapWidget->setProjection(Marble::Mercator);
+    mapWidget->setMapThemeId("earth/bluemarble/bluemarble.dgml");
+    QHBoxLayout * layot = new QHBoxLayout();
+    layot->addWidget(mapWidget);
+    ui->lwidget->setLayout(layot);
+
+    // убирвем стирекы таба
      ui->tabWidget->tabBar()->hide();
 
+
+     // Собственные модели
 //     QList <double> mq {10.0 , 10.0 , 10.0 , 10.0 , 10.0 ,10.0};
+
 
      QByteArray mq = QString("123456789345345").toUtf8();
 

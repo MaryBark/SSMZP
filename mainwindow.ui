@@ -360,7 +360,7 @@
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_2">
         <item>
-         <widget class="QWidget" name="widget" native="true"/>
+         <widget class="QWidget" name="lwidget" native="true"/>
         </item>
        </layout>
       </widget>

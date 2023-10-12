@@ -3,6 +3,18 @@
 
 #include <QMainWindow>
 
+
+// подключаем marble
+//#include "../3rd_party/marble-product/include/marble/MarbleWidget.h"
+#include "../../3rd_party/marble-product/include/marble/MarbleWidget.h"
+#include "../../3rd_party/marble-product/include/marble/GeoPainter.h"
+#include "../../3rd_party/marble-product/include/marble/MarbleMap.h"
+#include "../../3rd_party/marble-product/include/marble/GeoDataLineString.h"
+#include "../../3rd_party/marble-product/include/marble/LayerInterface.h"
+#include "../../3rd_party/marble-product/include/marble/RouteRequest.h"
+
+
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
