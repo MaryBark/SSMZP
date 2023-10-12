@@ -1,0 +1,11 @@
+.cmake/
+CMakeCache.txt
+CMakeCache.txt.prev
+CMakeFiles/
+CMakeLists.txt.user
+Makefile
+Testing/
+cmake_install.cmake
+matModelKA
+matModelKA_autogen/
+qtcsettings.cmake

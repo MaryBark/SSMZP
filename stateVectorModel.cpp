@@ -11,15 +11,13 @@ class stateVectorModelPrivate
 {
 public:
 //    QDateTime m_dt; // время КА
-//    QList <double > m_q; // вектор координат и скоростей КА
+//    QList <double > m_q; // вектор кеплеровый элементов орбиты КА
     QByteArray m_q;
 };
 
 stateVectorModel::stateVectorModel(QObject *parent) :
     m_dataModelptr(new stateVectorModelPrivate), QAbstractTableModel(parent)
-{
-
-}
+{}
 
 stateVectorModel::stateVectorModel(const QByteArray &dataModel, const QObject *parent):
     m_dataModelptr(new stateVectorModelPrivate()),
@@ -35,12 +33,12 @@ stateVectorModel::~stateVectorModel()
 
 int stateVectorModel::rowCount(const QModelIndex &parent) const
 {
-    return 10; // количество эфемерид (скольки их будет - это надо из бекенда дергать, а его пока не прикрутила)
+    return 10; // количество эфемерид (сколько их будет - это надо из бекенда дергать, а его пока не прикрутила)
 }
 
 int stateVectorModel::columnCount(const QModelIndex &parent) const
 {
-    return 7; // координаты, скорости и дата
+    return 7; // вектор кеплеровый элементов орбиты КА и дата
 }
 
 QVariant stateVectorModel::data(const QModelIndex &index, int role) const
@@ -88,7 +86,7 @@ QVariant stateVectorModel::data(const QModelIndex &index, int role) const
 
 //        int d = m_dataModelptr->m_q.at(index.row() * 7 + index.column());
 
-//        return QVariant(d)/*m_dataModelptr->m_q*//*value*/;
+        return QVariant(/*d*/10000)/*m_dataModelptr->m_q*//*value*/;
 
     }
      break;

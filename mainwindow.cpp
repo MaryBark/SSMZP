@@ -2,6 +2,7 @@
 #include "./ui_mainwindow.h"
 
 #include "stateVectorModel.h"
+#include "mathModelSpacecraft.h"
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -18,6 +19,9 @@ MainWindow::MainWindow(QWidget *parent)
 
     stateVectorModel *statVec = new stateVectorModel(mq, this);
     ui->tableView->setModel(statVec);
+
+    mathModelSpacecraft * mathMod  = new mathModelSpacecraft(/*this*/);
+    ui->treeView->setModel(mathMod);
 }
 
 MainWindow::~MainWindow()

@@ -20,6 +20,7 @@ set(PROJECT_SOURCES
         mainwindow.h
         mainwindow.ui
         stateVectorModel.h stateVectorModel.cpp
+        mathModelSpacecraft.h mathModelSpacecraft.cpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
