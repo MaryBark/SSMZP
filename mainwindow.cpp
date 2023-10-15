@@ -3,6 +3,7 @@
 
 #include "stateVectorModel.h"
 #include "mathModelSpacecraft.h"
+#include "MapMarbleTrassa.h"
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -23,11 +24,14 @@ MainWindow::MainWindow(QWidget *parent)
      ui->tabWidget->tabBar()->hide();
 
 
+//     vector<coordVectorBLH<double>> listKoord = MapMarbleTrassa::buildingRouteKA();
+
+
      // Собственные модели
-//     QList <double> mq {10.0 , 10.0 , 10.0 , 10.0 , 10.0 ,10.0};
+     QList <double> mq {10.0 , 10.0 , 10.0 , 10.0 , 10.0 ,10.0};
 
 
-     QByteArray mq = QString("123456789345345").toUtf8();
+//     QByteArray mq = QString("123456789345345").toUtf8();
 
     stateVectorModel *statVec = new stateVectorModel(mq, this);
     ui->tableView->setModel(statVec);

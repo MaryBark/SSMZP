@@ -11,15 +11,15 @@ class stateVectorModelPrivate
 {
 public:
 //    QDateTime m_dt; // время КА
-//    QList <double > m_q; // вектор кеплеровый элементов орбиты КА
-    QByteArray m_q;
+    QList <double > m_q; // вектор кеплеровый элементов орбиты КА
+//    QByteArray m_q;
 };
 
 stateVectorModel::stateVectorModel(QObject *parent) :
     m_dataModelptr(new stateVectorModelPrivate), QAbstractTableModel(parent)
 {}
 
-stateVectorModel::stateVectorModel(const QByteArray &dataModel, const QObject *parent):
+stateVectorModel::stateVectorModel(const QList <double > & dataModel, const QObject *parent):
     m_dataModelptr(new stateVectorModelPrivate()),
     QAbstractTableModel(/*parent*/)
 {
@@ -52,11 +52,11 @@ QVariant stateVectorModel::data(const QModelIndex &index, int role) const
 //        m_dataModelptr->m_q << = 10;
 //        m_dataModelptr->m_q[1] = 10;
 //        m_dataModelptr->m_q[3] = 10;
-//        int d =  m_dataModelptr->m_q[0];
+        int d =  m_dataModelptr->m_q[0];
 
-//        QVariant value;
-//        if (!index.isValid())
-//                return QVariant();
+        QVariant value;
+        if (!index.isValid())
+                return QVariant();
 
 //        QModelIndex index = this->model()->index(0, 0);
 //        QLabel *lblImage = new QLabel();
@@ -86,7 +86,7 @@ QVariant stateVectorModel::data(const QModelIndex &index, int role) const
 
 //        int d = m_dataModelptr->m_q.at(index.row() * 7 + index.column());
 
-        return QVariant(/*d*/10000)/*m_dataModelptr->m_q*//*value*/;
+        return QVariant(d);
 
     }
      break;
@@ -117,13 +117,6 @@ QVariant stateVectorModel::data(const QModelIndex &index, int role) const
         return QFont("Times", 10, QFont::Bold);
     }
       break;
-
-
-//    case Qt::Pa
-//   {
-//    }
-//    break;
-
     }
 
     return QVariant();
@@ -134,17 +127,74 @@ Qt::ItemFlags stateVectorModel::flags(const QModelIndex &index) const
 
 }
 
-bool stateVectorModel::setHeaderData(int section, Qt::Orientation orientation, const QVariant &value, int role)
+QVariant stateVectorModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
     switch(role)
     {
     case Qt::DisplayRole:
     {
+        if(orientation == Qt::Horizontal) {
+                switch(section) {
+                    case 0:
+                        return QString("Time");
+                    case 1:
+                        return QString("a");
+                    case 2:
+                        return QString("i");
+                    case 3:
+                        return QString("e");
+                    case 4:
+                        return QString("Q");
+                    case 5:
+                        return QString("u");
+                    case 6:
+                        return QString("M");
+                    default:
+                        return QVariant();
+                }
+            }
+    }
+     break;
+    case Qt::DecorationRole:
+       {
+        if(orientation == Qt::Horizontal) {
+                switch(section) {
+                    case 0:
+                        return QString("Time");
+                    case 1:
+                        return QIcon("semimajor.png");
+                    case 2:
+                        return QIcon("inclination.png");
+                    case 3:
+                        return QIcon("eccentricity.png");
+                    case 4:
+                        return QIcon("Longitude_of_the_ascending_node.png");
+                    case 5:
+                        return QIcon("The_pericenter_argument.png");
+                    case 6:
+                        return QIcon("Average_anomaly.png");
+                    default:
+                        return QVariant();
+                }
+            }
+    }
+         break;
+    case Qt::BackgroundRole:
+    {
+        return QColor(55, 0, 0, 40);
+    }
+      break;
+     case Qt::FontRole:
+    {
+        return QFont("Times", 10, QFont::Bold);
+    }
+      break;
+
 
     }
-        break;
-    }
+        return QVariant();
 }
+
 
 
 

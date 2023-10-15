@@ -15,8 +15,8 @@ class stateVectorModel : public QAbstractTableModel
     Q_OBJECT
 public:
     stateVectorModel(QObject* parent = nullptr);
+    stateVectorModel(const QList <double > & dataModel, const QObject* parent = nullptr);
 //    stateVectorModel(/*const QList <double >*/const QByteArray& dataModel, const QObject* parent = nullptr);
-    stateVectorModel(/*const QList <double >*/const QByteArray& dataModel, const QObject* parent = nullptr);
     ~stateVectorModel();
 
     // QAbstractItemModel interface
@@ -24,14 +24,11 @@ public:
     int columnCount(const QModelIndex &parent) const;
     QVariant data(const QModelIndex &index, int role) const;
     Qt::ItemFlags flags(const QModelIndex &index) const;
-    bool setHeaderData(int section, Qt::Orientation orientation, const QVariant &value, int role);
+    QVariant headerData(int section, Qt::Orientation orientation, int role) const;
 
 
 private:
     stateVectorModelPrivate *m_dataModelptr;
-
-
-    // QAbstractItemModel interface
 
 };
 
