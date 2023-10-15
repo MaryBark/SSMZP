@@ -216,7 +216,7 @@ QListWidget::item#btnMonitor {
 
 
 QPushButton {
-    background-color: #666666;
+    background-color: #C71585;
     border: 1px solid;
     border-radius: 3px;
     border-color: #CC6600;
@@ -229,7 +229,7 @@ QPushButton {
 QPushButton:pressed,
 QMenuBar::item:pressed  {
     border-color: #CC6600;
-    background-color: #663300;
+    background-color: #C71585;
 }
 
 
