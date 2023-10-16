@@ -37,8 +37,24 @@ MainWindow::MainWindow(QWidget *parent)
 
 //     QByteArray mq = QString("123456789345345").toUtf8();
 
-    stateVectorModel *statVec = new stateVectorModel(mq, this);
+//    stateVectorModel *statVec = new stateVectorModel(mq, this);
+//    ui->tableView->setModel(statVec);
+
+
+    QList<stateVectorShell> * values = new QList<stateVectorShell>;
+
+        values->append(stateVectorShell(1, 9, 5, 4, 3, 2));
+//        values->append(stateVectorShell(11, "Belarus", "belarus.png"));
+//        values->append(stateVectorShell(22, "Slovakia", "slovakia.png"));
+//        values->append(stateVectorShell(33, "Slovenia", "slovenia.png"));
+//        values->append(stateVectorShell(44, "China", "china.png"));
+//        values->append(stateVectorShell(55, "Mongolia","mongolia.png"));
+
+
+    stateVectorModel *statVec = new stateVectorModel(/*mq,*/ this);
+    statVec->populate(values);
     ui->tableView->setModel(statVec);
+
 
     mathModelSpacecraft * mathMod  = new mathModelSpacecraft(/*this*/);
     ui->treeView->setModel(mathMod);

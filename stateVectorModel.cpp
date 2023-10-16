@@ -17,7 +17,9 @@ public:
 
 stateVectorModel::stateVectorModel(QObject *parent) :
     m_dataModelptr(new stateVectorModelPrivate), QAbstractTableModel(parent)
-{}
+{
+    values = new QList<stateVectorShell>();
+}
 
 //stateVectorModel::stateVectorModel(std::vector<coordVectorBLH<double>>& dataModel, const QObject *parent):
 stateVectorModel::stateVectorModel(const QList <double > & dataModel, const QObject *parent):
@@ -25,6 +27,7 @@ stateVectorModel::stateVectorModel(const QList <double > & dataModel, const QObj
     QAbstractTableModel(/*parent*/)
 {
     m_dataModelptr->m_q = dataModel;
+    values = new QList<stateVectorShell>();
 }
 
 stateVectorModel::~stateVectorModel()
@@ -34,7 +37,7 @@ stateVectorModel::~stateVectorModel()
 
 int stateVectorModel::rowCount(const QModelIndex &parent) const
 {
-    return 10; // количество эфемерид (сколько их будет - это надо из бекенда дергать, а его пока не прикрутила)
+    return values->count(); // количество эфемерид (сколько их будет - это надо из бекенда дергать, а его пока не прикрутила)
 }
 
 int stateVectorModel::columnCount(const QModelIndex &parent) const
@@ -48,48 +51,35 @@ QVariant stateVectorModel::data(const QModelIndex &index, int role) const
     {
     case Qt::DisplayRole:
     {
-//        m_dataModelptr->m_q = QList<double>();
-//        m_dataModelptr->m_q << = 10;
-//        m_dataModelptr->m_q[1] = 10;
-//        m_dataModelptr->m_q[3] = 10;
-        QList <double> d;
-        d << m_dataModelptr->m_q[0] << m_dataModelptr->m_q[2] << m_dataModelptr->m_q[3];
-
         QVariant value;
-        if (!index.isValid())
-                return QVariant();
-
-//        QModelIndex index = this->model()->index(0, 0);
-//        QLabel *lblImage = new QLabel();
-//        lblImage->setPixmap(QPixmap("free-icon-whatsapp-3670051.png"));
-//        return lblImage;
-//        tabelview->setIndexWidget(index, lblImage);
-
-//        return QIcon("free-icon-whatsapp-3670051.png");
-
-//        switch (index.column()) {
-//        case 0: {
-//            value = m_dataModelptr->m_q.at(0/*index.row()*/);
-//            break;
-//        }
-//        case 1: {
-//            value = m_dataModelptr->m_q.at(156);
-//            break;
-//        }
-//        case 2: {
-//            value = m_dataModelptr->m_q.at(34546/*index.row()*/);
-//            break;
-//        }
-//        }
-
-//        this->setHeaderData(1, Qt::Horizontal, tr(""));
-
-
-//        int d = m_dataModelptr->m_q.at(index.row() * 7 + index.column());
-
-//        return QVariant(d);
-        return d;
-
+        switch (index.column())
+        {
+        case 0: {
+            value = this->values->at(index.row()).getX();
+            break;
+        }
+        case 1: {
+            value = this->values->at(index.row()).getY();
+            break;
+        }
+        case 2: {
+            value = this->values->at(index.row()).getZ();
+            break;
+        }
+        case 3: {
+            value = this->values->at(index.row()).getvX();
+            break;
+        }
+        case 4: {
+            value = this->values->at(index.row()).getvY();
+            break;
+        }
+        case 5: {
+            value = this->values->at(index.row()).getvZ();
+            break;
+        }
+        }
+        return value;
     }
      break;
     case Qt::DecorationRole:
@@ -124,10 +114,10 @@ QVariant stateVectorModel::data(const QModelIndex &index, int role) const
     return QVariant();
 }
 
-Qt::ItemFlags stateVectorModel::flags(const QModelIndex &index) const
-{
+//Qt::ItemFlags stateVectorModel::flags(const QModelIndex &index) const
+//{
 
-}
+//}
 
 QVariant stateVectorModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
@@ -197,7 +187,156 @@ QVariant stateVectorModel::headerData(int section, Qt::Orientation orientation, 
         return QVariant();
 }
 
+void stateVectorModel::populate(QList<stateVectorShell> *newValues)
+{
+    int idx = this->values->count();
+    this->beginInsertRows(QModelIndex(), 1, idx);
+    this->values = newValues;
+    endInsertRows();
+}
 
+
+//StateVectorModel::StateVectorModel(QObject *parent)
+//    :QAbstractListModel(parent)
+//{
+//    values = new QList<stateVectorShell>();
+//}
+
+//int StateVectorModel::rowCount(const QModelIndex &parent) const
+//{
+//    return values->count();
+//}
+
+//int StateVectorModel::columnCount(const QModelIndex &parent) const
+//{
+//    return 6;
+//}
+
+//QVariant StateVectorModel::data(const QModelIndex &index, int role) const
+//{
+//    QVariant value;
+
+//           switch ( role )
+//           {
+//               case Qt::DisplayRole: //string
+//               {
+//                   switch (index.column()) {
+//                       case 0: {
+//                           value = this->values->at(index.row()).getX();
+//                           break;
+//                       }
+//                       case 1: {
+//                           value = this->values->at(index.row()).getY();
+//                           break;
+//                       }
+//                       case 2: {
+//                           value = this->values->at(index.row()).getZ();
+//                           break;
+//                       }
+//                   case 3: {
+//                       value = this->values->at(index.row()).getvX();
+//                       break;
+//                   }
+//                   case 4: {
+//                       value = this->values->at(index.row()).getvY();
+//                       break;
+//                   }
+//                   case 5: {
+//                       value = this->values->at(index.row()).getvZ();
+//                       break;
+//                   }
+//                   }
+//               }
+//               break;
+
+////               case Qt::UserRole: //data
+////               {
+////                   value = this->values->at(index.row()).getId();
+////               }
+////               break;
+
+//               default:
+//                   break;
+//           }
+
+//       return value;
+//}
+
+//QVariant StateVectorModel::headerData(int section, Qt::Orientation orientation, int role) const
+//{
+//    switch(role)
+//       {
+//       case Qt::DisplayRole:
+//       {
+//           if(orientation == Qt::Horizontal) {
+//                   switch(section) {
+//                       case 0:
+//                           return QString("Time");
+//                       case 1:
+//                           return QString("a");
+//                       case 2:
+//                           return QString("i");
+//                       case 3:
+//                           return QString("e");
+//                       case 4:
+//                           return QString("Q");
+//                       case 5:
+//                           return QString("u");
+//                       case 6:
+//                           return QString("M");
+//                       default:
+//                           return QVariant();
+//                   }
+//               }
+//       }
+//        break;
+//       case Qt::DecorationRole:
+//          {
+////           if(orientation == Qt::Horizontal) {
+////                   switch(section) {
+////                       case 0:
+////                           return QString("Time");
+////                       case 1:
+////                           return QIcon("semimajor.png");
+////                       case 2:
+////                           return QIcon("inclination.png");
+////                       case 3:
+////                           return QIcon("eccentricity.png");
+////                       case 4:
+////                           return QIcon("Longitude_of_the_ascending_node.png");
+////                       case 5:
+////                           return QIcon("The_pericenter_argument.png");
+////                       case 6:
+////                           return QIcon("Average_anomaly.png");
+////                       default:
+////                           return QVariant();
+////                   }
+////               }
+//       }
+//            break;
+//       case Qt::BackgroundRole:
+//       {
+//           return QColor(55, 0, 0, 40);
+//       }
+//         break;
+//        case Qt::FontRole:
+//       {
+//           return QFont("Times", 10, QFont::Bold);
+//       }
+//         break;
+
+
+//       }
+//    return QVariant();
+//}
+
+//void StateVectorModel::populate(QList<stateVectorShell> *newValues)
+//{
+//    int idx = this->values->count();
+//       this->beginInsertRows(QModelIndex(), 1, idx);
+//           this->values = newValues;
+//       endInsertRows();
+//}
 
 
 

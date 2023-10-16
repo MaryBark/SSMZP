@@ -36,6 +36,8 @@ set(PROJECT_SOURCES
         definitions.h
         xyz2blh.h xyz2blh.cpp
         TMicsellFunction.h TMicsellFunction.cpp
+        stateVectorShell.h stateVectorShell.cpp
+#        StateVectorModel.h StateVectorModel.cpp
 )
 
 message("PROJECT_SOURCES")
