@@ -8,6 +8,8 @@
 #include <QPolygonF>
 #include <QPointF>
 
+
+
 class stateVectorModelPrivate;
 
 class stateVectorModel : public QAbstractTableModel
@@ -15,6 +17,7 @@ class stateVectorModel : public QAbstractTableModel
     Q_OBJECT
 public:
     stateVectorModel(QObject* parent = nullptr);
+//    stateVectorModel(std::vector<coordVectorBLH<double>>& dataModel, const QObject* parent = nullptr);
     stateVectorModel(const QList <double > & dataModel, const QObject* parent = nullptr);
 //    stateVectorModel(/*const QList <double >*/const QByteArray& dataModel, const QObject* parent = nullptr);
     ~stateVectorModel();

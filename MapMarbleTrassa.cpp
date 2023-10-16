@@ -87,7 +87,7 @@ vector<coordVectorBLH<double>> MapMarbleTrassa::buildingRouteKA()
     vector<double> coord;
     coord = Runge_Kutta(init_coord, acc, n, h);
 
-    _coord = coord;
+//    _coord = coord;
 
     vector<vector<double>> coord2array;
     double minh, maxh, R;

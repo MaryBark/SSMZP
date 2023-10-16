@@ -19,6 +19,7 @@ stateVectorModel::stateVectorModel(QObject *parent) :
     m_dataModelptr(new stateVectorModelPrivate), QAbstractTableModel(parent)
 {}
 
+//stateVectorModel::stateVectorModel(std::vector<coordVectorBLH<double>>& dataModel, const QObject *parent):
 stateVectorModel::stateVectorModel(const QList <double > & dataModel, const QObject *parent):
     m_dataModelptr(new stateVectorModelPrivate()),
     QAbstractTableModel(/*parent*/)
@@ -43,7 +44,6 @@ int stateVectorModel::columnCount(const QModelIndex &parent) const
 
 QVariant stateVectorModel::data(const QModelIndex &index, int role) const
 {
-
     switch(role)
     {
     case Qt::DisplayRole:
@@ -52,7 +52,8 @@ QVariant stateVectorModel::data(const QModelIndex &index, int role) const
 //        m_dataModelptr->m_q << = 10;
 //        m_dataModelptr->m_q[1] = 10;
 //        m_dataModelptr->m_q[3] = 10;
-        int d =  m_dataModelptr->m_q[0];
+        QList <double> d;
+        d << m_dataModelptr->m_q[0] << m_dataModelptr->m_q[2] << m_dataModelptr->m_q[3];
 
         QVariant value;
         if (!index.isValid())
@@ -86,7 +87,8 @@ QVariant stateVectorModel::data(const QModelIndex &index, int role) const
 
 //        int d = m_dataModelptr->m_q.at(index.row() * 7 + index.column());
 
-        return QVariant(d);
+//        return QVariant(d);
+        return d;
 
     }
      break;

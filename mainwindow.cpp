@@ -24,12 +24,16 @@ MainWindow::MainWindow(QWidget *parent)
      ui->tabWidget->tabBar()->hide();
 
 
+     vector<coordVectorBLH<double>> coord;
+    coord = MapMarbleTrassa::buildingRouteKA();
+
 //     vector<coordVectorBLH<double>> listKoord = MapMarbleTrassa::buildingRouteKA();
 
 
      // Собственные модели
-     QList <double> mq {10.0 , 10.0 , 10.0 , 10.0 , 10.0 ,10.0};
-
+     QList <double> mq;
+     //{10.0 , 10.0 , 10.0 , 10.0 , 10.0 ,10.0};
+    mq << coord[0].b << coord[0].l << coord[0].h;
 
 //     QByteArray mq = QString("123456789345345").toUtf8();
 
@@ -44,7 +48,6 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
-
 
 void MainWindow::on_pushButton_clicked()
 {

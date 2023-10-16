@@ -12,7 +12,7 @@ class MapMarbleTrassa
 public:
     MapMarbleTrassa();
 
-    /*static*/ vector<coordVectorBLH<double>> buildingRouteKA();
+    static vector<coordVectorBLH<double>> buildingRouteKA();
 
     static vector<double> Runge_Kutta(vector<double> init_coord, vector<double> acc,int n,int h);
 

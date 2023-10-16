@@ -290,6 +290,15 @@ public:
 
     virtual unsigned length() const {   return 3;   }
 
+    coordVectorBLH<T>& operator=(const coordVectorBLH<T>& old)
+    {
+        b = old.b;
+        l = old.l;
+        h = old.h;
+        return *this;
+
+    }
+
 };
 
 #endif // COORDINATEVECTORS_H
