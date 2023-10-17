@@ -347,6 +347,11 @@
        <attribute name="title">
         <string>Страница</string>
        </attribute>
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <widget class="QTableView" name="tableView_2"/>
+        </item>
+       </layout>
       </widget>
       <widget class="QWidget" name="tab_4">
        <attribute name="title">

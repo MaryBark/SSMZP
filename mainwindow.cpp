@@ -23,38 +23,20 @@ MainWindow::MainWindow(QWidget *parent)
     // убирвем стирекы таба
      ui->tabWidget->tabBar()->hide();
 
-
-     vector<coordVectorBLH<double>> coord;
-    coord = MapMarbleTrassa::buildingRouteKA();
-
-//     vector<coordVectorBLH<double>> listKoord = MapMarbleTrassa::buildingRouteKA();
-
-
-     // Собственные модели
-     QList <double> mq;
-     //{10.0 , 10.0 , 10.0 , 10.0 , 10.0 ,10.0};
-    mq << coord[0].b << coord[0].l << coord[0].h;
-
-//     QByteArray mq = QString("123456789345345").toUtf8();
-
-//    stateVectorModel *statVec = new stateVectorModel(mq, this);
-//    ui->tableView->setModel(statVec);
-
+    // Заполнение таблицы
+    vector</*coordVectorXYZ<*/double/*>*/> coord;
+    coord = MapMarbleTrassa::buildingRouteKAXYZ1();
 
     QList<stateVectorShell> * values = new QList<stateVectorShell>;
-
-        values->append(stateVectorShell(1, 9, 5, 4, 3, 2));
-//        values->append(stateVectorShell(11, "Belarus", "belarus.png"));
-//        values->append(stateVectorShell(22, "Slovakia", "slovakia.png"));
-//        values->append(stateVectorShell(33, "Slovenia", "slovenia.png"));
-//        values->append(stateVectorShell(44, "China", "china.png"));
-//        values->append(stateVectorShell(55, "Mongolia","mongolia.png"));
-
+    for(int i = 1; i < coord.size(); i++)
+    {
+        values->append(stateVectorShell(QDateTime(), coord[(i-1) * 6], coord[(i-1) * 6 +1], coord[(i-1) * 6 +2],
+                coord[(i-1) * 6 + 3], coord[(i-1) * 6 + 4], coord[(i-1) * 6 + 5]));
+    }
 
     stateVectorModel *statVec = new stateVectorModel(/*mq,*/ this);
     statVec->populate(values);
     ui->tableView->setModel(statVec);
-
 
     mathModelSpacecraft * mathMod  = new mathModelSpacecraft(/*this*/);
     ui->treeView->setModel(mathMod);

@@ -2,6 +2,7 @@
 
 #include <math.h>
 #include <QByteArray>
+#include <QVector>
 
 
 MapMarbleTrassa::MapMarbleTrassa() : _coord()
@@ -106,6 +107,89 @@ vector<coordVectorBLH<double>> MapMarbleTrassa::buildingRouteKA()
     }
 
     return coordBLH_R;
+}
+
+vector<coordVectorXYZ<double> > MapMarbleTrassa::buildingRouteKAXYZ()
+{
+    // координаты левого рандомного спутника и пес с ним((((
+    vector<double> init_coord(6);
+    vector<double> acc(6);
+    init_coord[0]=-0.615996679688*pow(10.0,4)*1000; // в метрах эта ересь
+    init_coord[1]=-0.157834936523*pow(10.0,5)*1000;
+    init_coord[2]=0.190386489258*pow(10.0,5)*1000;
+    init_coord[3]=0.387048721313*1000;
+    init_coord[4]=-0.258716773987*pow(10.0,1)*1000;
+    init_coord[5]=-0.201687240601*pow(10.0,1)*1000;
+
+    acc[0]=0.931322574616*pow(10.0,-9)*1000;
+    acc[1]=0.000000000000*1000;
+    acc[2]=-0.279396772385*pow(10.0,-8)*1000;
+
+    int n=1115;
+    int h=150;
+
+    double CHUR[3],GOLD[3],SCH[3],WHIT[3];
+    CHUR[0]=-0.236438985662755*pow(10.0,6);CHUR[1]=-0.330761688992456*pow(10.0,7);CHUR[2]=0.543004928368367*pow(10.0,7);
+    GOLD[0]=-0.235361442800738*pow(10.0,7);GOLD[1]=-0.464138528219584*pow(10.0,7);GOLD[2]=0.367697640102964*pow(10.0,7);
+    SCH[0]=0.144863666340839*pow(10.0,7);SCH[1]=-0.338524374414401*pow(10.0,7);SCH[2]=0.519104714249338*pow(10.0,7);
+    WHIT[0]=-0.221833805636663*pow(10.0,7);WHIT[1]=-0.220120512159133*pow(10.0,7);WHIT[2]=0.554305751316722*pow(10.0,7);
+
+    double c = 299792458.0; //скорость светы..... бесит
+    double omega = 7.292115 * pow(10.0, -5); // радиальная скорость вращения Земли
+
+    // иинтегрируем ';nb дифуры движения
+    vector<double> coord;
+    coord = Runge_Kutta(init_coord, acc, n, h);
+
+    vector<coordVectorXYZ<double>> coordXYZ_R;
+
+    int i = 0, j = 1;
+    for ( j = 1; j < n; j++)
+    {
+//        /*coordVectorXYZ<*/double/*>*/ * xyz3;
+        coordVectorXYZ<double> xyz1, xyz;
+        double x, y, z;
+
+        xyz1 = coordVectorXYZ< double >(coord[(j-1) * 6], coord[(j-1) * 6 +1], coord[(j-1) * 6 +2]);
+        coordXYZ_R.push_back(xyz1);
+    }
+
+    return coordXYZ_R;
+}
+
+vector<double> MapMarbleTrassa::buildingRouteKAXYZ1()
+{
+    // координаты левого рандомного спутника и пес с ним((((
+    vector<double> init_coord(6);
+    vector<double> acc(6);
+    init_coord[0]=-0.615996679688*pow(10.0,4)*1000; // в метрах эта ересь
+    init_coord[1]=-0.157834936523*pow(10.0,5)*1000;
+    init_coord[2]=0.190386489258*pow(10.0,5)*1000;
+    init_coord[3]=0.387048721313*1000;
+    init_coord[4]=-0.258716773987*pow(10.0,1)*1000;
+    init_coord[5]=-0.201687240601*pow(10.0,1)*1000;
+
+    acc[0]=0.931322574616*pow(10.0,-9)*1000;
+    acc[1]=0.000000000000*1000;
+    acc[2]=-0.279396772385*pow(10.0,-8)*1000;
+
+    int n=1115;
+    int h=150;
+
+    double CHUR[3],GOLD[3],SCH[3],WHIT[3];
+    CHUR[0]=-0.236438985662755*pow(10.0,6);CHUR[1]=-0.330761688992456*pow(10.0,7);CHUR[2]=0.543004928368367*pow(10.0,7);
+    GOLD[0]=-0.235361442800738*pow(10.0,7);GOLD[1]=-0.464138528219584*pow(10.0,7);GOLD[2]=0.367697640102964*pow(10.0,7);
+    SCH[0]=0.144863666340839*pow(10.0,7);SCH[1]=-0.338524374414401*pow(10.0,7);SCH[2]=0.519104714249338*pow(10.0,7);
+    WHIT[0]=-0.221833805636663*pow(10.0,7);WHIT[1]=-0.220120512159133*pow(10.0,7);WHIT[2]=0.554305751316722*pow(10.0,7);
+
+    double c = 299792458.0; //скорость светы..... бесит
+    double omega = 7.292115 * pow(10.0, -5); // радиальная скорость вращения Земли
+
+    // иинтегрируем ';nb дифуры движения
+    vector<double> coord;
+    coord = Runge_Kutta(init_coord, acc, n, h);
+
+    return coord;
 }
 
 vector<double> MapMarbleTrassa::Runge_Kutta(vector<double> init_coord, vector<double> acc, int n, int h)
