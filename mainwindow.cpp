@@ -20,6 +20,7 @@ MainWindow::MainWindow(QWidget *parent)
     layot->addWidget(mapWidget);
     ui->lwidget->setLayout(layot);
 
+
     // убирвем стирекы таба
      ui->tabWidget->tabBar()->hide();
 
@@ -39,7 +40,10 @@ MainWindow::MainWindow(QWidget *parent)
     ui->tableView->setModel(statVec);
 
     mathModelSpacecraft * mathMod  = new mathModelSpacecraft(/*this*/);
-    ui->treeView->setModel(mathMod);
+    ui->tableView_2->setModel(mathMod);
+
+
+
 }
 
 MainWindow::~MainWindow()

@@ -39,6 +39,8 @@ set(PROJECT_SOURCES
         stateVectorShell.h stateVectorShell.cpp
         stateVectorDelegate.h stateVectorDelegate.cpp
         VectorModel.h VectorModel.cpp
+        MapSettings.h MapSettings.cpp MapSettings.ui
+        settingsTreeView.h settingsTreeView.cpp
 )
 
 message("PROJECT_SOURCES")

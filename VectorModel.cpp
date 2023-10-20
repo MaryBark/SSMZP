@@ -48,7 +48,7 @@ QVariant VectorModel::data(const QModelIndex &index, int role) const
 
                case Qt::UserRole: //data
                {
-                   value = this->values->at(index.row()).getId();
+//                   value = this->values->at(index.row()).getId();
                }
                break;
 
