@@ -4,6 +4,9 @@
 #include "stateVectorModel.h"
 #include "mathModelSpacecraft.h"
 #include "MapMarbleTrassa.h"
+#include "stateVectorDelegate.h"
+#include <QStandardItemModel>
+#include "MapSettings.h"
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -19,7 +22,6 @@ MainWindow::MainWindow(QWidget *parent)
     QHBoxLayout * layot = new QHBoxLayout();
     layot->addWidget(mapWidget);
     ui->lwidget->setLayout(layot);
-
 
     // убирвем стирекы таба
      ui->tabWidget->tabBar()->hide();
@@ -41,9 +43,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     mathModelSpacecraft * mathMod  = new mathModelSpacecraft(/*this*/);
     ui->tableView_2->setModel(mathMod);
-
-
-
+    ui->tableView_2->setItemDelegate(new stateVectorDelegate());
 }
 
 MainWindow::~MainWindow()
@@ -70,7 +70,6 @@ void MainWindow::on_pushButton_3_clicked()
     ui->stackedWidget->setCurrentIndex(2);
 }
 
-
 void MainWindow::on_pushButton_4_clicked()
 {
     ui->tabWidget->setCurrentIndex(3);
@@ -81,5 +80,11 @@ void MainWindow::on_pushButton_5_clicked()
 {
     ui->tabWidget->setCurrentIndex(4);
     ui->stackedWidget->setCurrentIndex(4);
+}
+
+void MainWindow::on_pBsettingMap_clicked()
+{
+    MapSettings * mapSet = new MapSettings();
+    mapSet->show();
 }
 

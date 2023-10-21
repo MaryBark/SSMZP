@@ -43,7 +43,7 @@ int mathModelSpacecraft::rowCount(const QModelIndex &parent) const
 
 int mathModelSpacecraft::columnCount(const QModelIndex &parent) const
 {
-    return 1;
+    return 4;
 }
 
 QVariant mathModelSpacecraft::data(const QModelIndex &index, int role) const
