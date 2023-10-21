@@ -6,6 +6,7 @@ MapSettings::MapSettings(QWidget *parent) :
     ui(new Ui::MapSettings)
 {
     ui->setupUi(this);
+    setWindowTitle("Настройки карты");
 }
 
 MapSettings::~MapSettings()

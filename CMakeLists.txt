@@ -41,6 +41,8 @@ set(PROJECT_SOURCES
         VectorModel.h VectorModel.cpp
         MapSettings.h MapSettings.cpp MapSettings.ui
         settingsTreeView.h settingsTreeView.cpp
+        settingsTreeItem.h settingsTreeItem.cpp
+        MapMarbleDelegate.h MapMarbleDelegate.cpp
 )
 
 message("PROJECT_SOURCES")
