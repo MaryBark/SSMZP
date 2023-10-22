@@ -8,6 +8,8 @@
 #include <QStandardItemModel>
 #include "MapSettings.h"
 
+#include "connectDataBase.h"
+
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -44,6 +46,67 @@ MainWindow::MainWindow(QWidget *parent)
     mathModelSpacecraft * mathMod  = new mathModelSpacecraft(/*this*/);
     ui->tableView_2->setModel(mathMod);
     ui->tableView_2->setItemDelegate(new stateVectorDelegate());
+
+
+    // Создание объекта базы данных
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+
+    // Указание имени файла базы данных
+    db.setDatabaseName("example.db");
+
+    // Открытие базы данных
+    if (!db.open())
+    {
+        qDebug() << "Не удалось открыть базу данных";
+//        return -1;
+    }
+
+    // Создание таблицы
+    QSqlQuery query;
+    if (!query.exec("CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, name TEXT, age INTEGER)"))
+    {
+        qDebug() << "Не удалось создать таблицу";
+//        return -1;
+    }
+
+    // Добавление записи в таблицу
+    if (!query.exec("INSERT INTO users (name, age) VALUES ('John', 30)"))
+    {
+        qDebug() << "Не удалось добавить запись в таблицу";
+//        return -1;
+    }
+
+    // Выборка данных из таблицы
+    if (!query.exec("SELECT * FROM users"))
+    {
+        qDebug() << "Не удалось выбрать данные из таблицы";
+//        return -1;
+    }
+
+    // Обработка результатов выборки
+    while (query.next())
+    {
+        int id = query.value(0).toInt();
+        QString name = query.value(1).toString();
+        int age = query.value(2).toInt();
+
+        qDebug() << "ID:" << id << "Имя:" << name << "Возраст:" << age;
+    }
+
+    // Закрытие базы данных
+    db.close();
+
+
+    QSqlTableModel *model = new QSqlTableModel;
+        model->setTable("users");
+        model->setEditStrategy(QSqlTableModel::OnManualSubmit);
+        model->select();
+//        model->setHeaderData(0, Qt::Horizontal, tr("Name"));
+//        model->setHeaderData(1, Qt::Horizontal, tr("Salary"));
+
+        ui->tableView_3->setModel(model);
+
+
 }
 
 MainWindow::~MainWindow()
@@ -56,7 +119,6 @@ void MainWindow::on_pushButton_clicked()
     ui->tabWidget->setCurrentIndex(0);
     ui->stackedWidget->setCurrentIndex(0);
 }
-
 
 void MainWindow::on_pushButton_2_clicked()
 {
@@ -86,5 +148,11 @@ void MainWindow::on_pBsettingMap_clicked()
 {
     MapSettings * mapSet = new MapSettings();
     mapSet->show();
+}
+
+
+void MainWindow::on_pushButtonBD_clicked()
+{
+    ui->tabWidget->setCurrentIndex(5);
 }
 

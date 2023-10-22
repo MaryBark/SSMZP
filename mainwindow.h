@@ -40,6 +40,8 @@ private slots:
 
     void on_pBsettingMap_clicked();
 
+    void on_pushButtonBD_clicked();
+
 private:
     Ui::MainWindow *ui;
 };

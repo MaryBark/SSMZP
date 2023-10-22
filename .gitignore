@@ -11,4 +11,5 @@ matModelKA_autogen/
 qtcsettings.cmake
 CPackConfig.cmake
 CPackSourceConfig.cmake
+example.db
 

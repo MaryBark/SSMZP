@@ -83,6 +83,9 @@ public:
     void setTrackPen(const QPen&);
 
 
+public Q_SLOTS:
+
+
 private:
     Ui::MapSettings *ui;
 };

@@ -13,6 +13,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(QT NAMES Qt6 Qt5 COMPONENTS Widgets REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets REQUIRED)
+find_package(Qt5 REQUIRED COMPONENTS Core Quick Sql)
 
 # ПОДКЛЮЧАЕМ MARBLE ++++++++++++++++++++++++++++++++++++++++++
 # указываем в нашем проекте где лежат дополнительные .cmake файлы
@@ -43,6 +44,7 @@ set(PROJECT_SOURCES
         settingsTreeView.h settingsTreeView.cpp
         settingsTreeItem.h settingsTreeItem.cpp
         MapMarbleDelegate.h MapMarbleDelegate.cpp
+        connectDataBase.h connectDataBase.cpp
 )
 
 message("PROJECT_SOURCES")
@@ -71,7 +73,11 @@ else()
     endif()
 endif()
 
-target_link_libraries(matModelKA PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+# Для марбл на всякий случай))))
+#target_link_libraries(matModelKA PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+find_package(Qt COMPONENTS Sql REQUIRED)
+target_link_libraries(matModelKA PRIVATE Qt${QT_VERSION_MAJOR}::Widgets
+  PRIVATE Qt::Sql)
 
 # после того, какпрописану все свойства, прописываем
 target_include_directories(matModelKA PRIVATE "/home/mary/3rd_party/marble-product/include/marble")
