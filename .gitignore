@@ -12,4 +12,5 @@ qtcsettings.cmake
 CPackConfig.cmake
 CPackSourceConfig.cmake
 example.db
+mathDataBase.db
 

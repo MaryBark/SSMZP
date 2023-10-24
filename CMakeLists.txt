@@ -45,6 +45,7 @@ set(PROJECT_SOURCES
         settingsTreeItem.h settingsTreeItem.cpp
         MapMarbleDelegate.h MapMarbleDelegate.cpp
         connectDataBase.h connectDataBase.cpp
+        PZ_90_02.h
 )
 
 message("PROJECT_SOURCES")

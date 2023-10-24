@@ -48,65 +48,67 @@ MainWindow::MainWindow(QWidget *parent)
     ui->tableView_2->setItemDelegate(new stateVectorDelegate());
 
 
-    // Создание объекта базы данных
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+    connectDataBase *db = new connectDataBase("mathDataBase.db");
 
-    // Указание имени файла базы данных
-    db.setDatabaseName("example.db");
 
-    // Открытие базы данных
-    if (!db.open())
-    {
-        qDebug() << "Не удалось открыть базу данных";
-//        return -1;
-    }
 
-    // Создание таблицы
-    QSqlQuery query;
-    if (!query.exec("CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, name TEXT, age INTEGER)"))
-    {
-        qDebug() << "Не удалось создать таблицу";
-//        return -1;
-    }
+//    // Создание объекта базы данных
+//    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
 
-    // Добавление записи в таблицу
-    if (!query.exec("INSERT INTO users (name, age) VALUES ('John', 30)"))
-    {
-        qDebug() << "Не удалось добавить запись в таблицу";
-//        return -1;
-    }
+//    // Указание имени файла базы данных
+//    db.setDatabaseName("example.db");
 
-    // Выборка данных из таблицы
-    if (!query.exec("SELECT * FROM users"))
-    {
-        qDebug() << "Не удалось выбрать данные из таблицы";
-//        return -1;
-    }
+//    // Открытие базы данных
+//    if (!db.open())
+//    {
+//        qDebug() << "Не удалось открыть базу данных";
+////        return -1;
+//    }
 
-    // Обработка результатов выборки
-    while (query.next())
-    {
-        int id = query.value(0).toInt();
-        QString name = query.value(1).toString();
-        int age = query.value(2).toInt();
+//    // Создание таблицы
+//    QSqlQuery query;
+//    if (!query.exec("CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, name TEXT, age INTEGER)"))
+//    {
+//        qDebug() << "Не удалось создать таблицу";
+////        return -1;
+//    }
 
-        qDebug() << "ID:" << id << "Имя:" << name << "Возраст:" << age;
-    }
+//    // Добавление записи в таблицу
+//    if (!query.exec("INSERT INTO users (name, age) VALUES ('John', 30)"))
+//    {
+//        qDebug() << "Не удалось добавить запись в таблицу";
+////        return -1;
+//    }
 
-    // Закрытие базы данных
-    db.close();
+//    // Выборка данных из таблицы
+//    if (!query.exec("SELECT * FROM users"))
+//    {
+//        qDebug() << "Не удалось выбрать данные из таблицы";
+////        return -1;
+//    }
+
+//    // Обработка результатов выборки
+//    while (query.next())
+//    {
+//        int id = query.value(0).toInt();
+//        QString name = query.value(1).toString();
+//        int age = query.value(2).toInt();
+
+//        qDebug() << "ID:" << id << "Имя:" << name << "Возраст:" << age;
+//    }
+
+//    // Закрытие базы данных
+//    db.close();
 
 
     QSqlTableModel *model = new QSqlTableModel;
-        model->setTable("users");
+        model->setTable("Gepotenzival");
         model->setEditStrategy(QSqlTableModel::OnManualSubmit);
         model->select();
 //        model->setHeaderData(0, Qt::Horizontal, tr("Name"));
 //        model->setHeaderData(1, Qt::Horizontal, tr("Salary"));
 
         ui->tableView_3->setModel(model);
-
-
 }
 
 MainWindow::~MainWindow()
@@ -149,7 +151,6 @@ void MainWindow::on_pBsettingMap_clicked()
     MapSettings * mapSet = new MapSettings();
     mapSet->show();
 }
-
 
 void MainWindow::on_pushButtonBD_clicked()
 {

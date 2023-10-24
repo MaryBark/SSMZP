@@ -8,7 +8,10 @@
 class connectDataBase
 {
 public:
-    connectDataBase();
+    connectDataBase(const QString& dataBase);
+
+
+
 };
 
 #endif // CONNECTDATABASE_H
