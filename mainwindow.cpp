@@ -7,7 +7,8 @@
 #include "stateVectorDelegate.h"
 #include <QStandardItemModel>
 #include "MapSettings.h"
-
+#include "settingsTreeView.h"
+#include "settingsTreeItem.h"
 #include "connectDataBase.h"
 
 
@@ -24,6 +25,9 @@ MainWindow::MainWindow(QWidget *parent)
     QHBoxLayout * layot = new QHBoxLayout();
     layot->addWidget(mapWidget);
     ui->lwidget->setLayout(layot);
+
+    ui->pBback->setIcon(QIcon("left-arrow.png"));
+    ui->pBNext->setIcon(QIcon("right-arrow.png"));
 
     // убирвем стирекы таба
      ui->tabWidget->tabBar()->hide();
@@ -47,68 +51,53 @@ MainWindow::MainWindow(QWidget *parent)
     ui->tableView_2->setModel(mathMod);
     ui->tableView_2->setItemDelegate(new stateVectorDelegate());
 
+    // настройки через делегат от treeview
+    QTreeView treeView;
+    QStandardItemModel modelStdItem;
+
+    // Создание заголовков колонок
+    modelStdItem.setHorizontalHeaderLabels({"MDKA", "MDKA Value"});
+
+    // Создание данных настроек
+    QList<QStandardItem*> setting1;
+    QStandardItem* keyItem1 = new QStandardItem("MDKA1");
+    QStandardItem* valueItem1 = new QStandardItem("MDKA Value1");
+    setting1 << keyItem1 << valueItem1;
+    modelStdItem.appendRow(setting1);
+
+    QList<QStandardItem*> setting2;
+    QStandardItem* keyItem2 = new QStandardItem("MDKA2");
+    QStandardItem* valueItem2 = new QStandardItem("MDKA Value2");
+    setting2 << keyItem2 << valueItem2;
+    modelStdItem.appendRow(setting2);
+
+    // Установка модели данных для QTreeView
+    // Установка модели данных для QTreeView
+    treeView.setModel(&modelStdItem);
+
+    // Установка делегата для второй колонки
+    SettingsDelegate* delegate1 = new SettingsDelegate;
+    treeView.setItemDelegateForColumn(1, delegate1);
+
+    treeView.show();
+    ui->horizontalLayout_5->addWidget(&treeView);
+
+
+
 
     connectDataBase *db = new connectDataBase("mathDataBase.db");
 
+    QSqlTableModel *model = new QSqlTableModel(this, QSqlDatabase::database());
+    model->setTable("erty");
+    model->setEditStrategy(QSqlTableModel::OnManualSubmit);
+    model->select();
+    //        model->setHeaderData(0, Qt::Horizontal, tr("Name"));
+    //        model->setHeaderData(1, Qt::Horizontal, tr("Salary"));
+    ui->tableView_3->setModel(model);
 
 
-//    // Создание объекта базы данных
-//    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
-
-//    // Указание имени файла базы данных
-//    db.setDatabaseName("example.db");
-
-//    // Открытие базы данных
-//    if (!db.open())
-//    {
-//        qDebug() << "Не удалось открыть базу данных";
-////        return -1;
-//    }
-
-//    // Создание таблицы
-//    QSqlQuery query;
-//    if (!query.exec("CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, name TEXT, age INTEGER)"))
-//    {
-//        qDebug() << "Не удалось создать таблицу";
-////        return -1;
-//    }
-
-//    // Добавление записи в таблицу
-//    if (!query.exec("INSERT INTO users (name, age) VALUES ('John', 30)"))
-//    {
-//        qDebug() << "Не удалось добавить запись в таблицу";
-////        return -1;
-//    }
-
-//    // Выборка данных из таблицы
-//    if (!query.exec("SELECT * FROM users"))
-//    {
-//        qDebug() << "Не удалось выбрать данные из таблицы";
-////        return -1;
-//    }
-
-//    // Обработка результатов выборки
-//    while (query.next())
-//    {
-//        int id = query.value(0).toInt();
-//        QString name = query.value(1).toString();
-//        int age = query.value(2).toInt();
-
-//        qDebug() << "ID:" << id << "Имя:" << name << "Возраст:" << age;
-//    }
-
-//    // Закрытие базы данных
-//    db.close();
-
-
-    QSqlTableModel *model = new QSqlTableModel;
-        model->setTable("Gepotenzival");
-        model->setEditStrategy(QSqlTableModel::OnManualSubmit);
-        model->select();
-//        model->setHeaderData(0, Qt::Horizontal, tr("Name"));
-//        model->setHeaderData(1, Qt::Horizontal, tr("Salary"));
-
-        ui->tableView_3->setModel(model);
+    DatabaseDelegate* delegate = new DatabaseDelegate;
+    ui->tableView_3->setItemDelegateForColumn(5, delegate);
 }
 
 MainWindow::~MainWindow()
@@ -155,5 +144,16 @@ void MainWindow::on_pBsettingMap_clicked()
 void MainWindow::on_pushButtonBD_clicked()
 {
     ui->tabWidget->setCurrentIndex(5);
+}
+
+void MainWindow::on_pBback_clicked()
+{
+    ui->stackedWidget_2->setCurrentIndex(ui->stackedWidget_2->currentIndex() - 1);
+
+}
+
+void MainWindow::on_pBNext_clicked()
+{
+    ui->stackedWidget_2->setCurrentIndex(ui->stackedWidget_2->currentIndex() + 1);
 }
 

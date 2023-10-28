@@ -46,6 +46,7 @@ set(PROJECT_SOURCES
         MapMarbleDelegate.h MapMarbleDelegate.cpp
         connectDataBase.h connectDataBase.cpp
         PZ_90_02.h
+#        MathModelOld.h MathModelOld.cpp
 )
 
 message("PROJECT_SOURCES")

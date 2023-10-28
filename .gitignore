@@ -13,4 +13,6 @@ CPackConfig.cmake
 CPackSourceConfig.cmake
 example.db
 mathDataBase.db
+MathModelOld.cpp
+MathModelOld.h
 

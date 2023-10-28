@@ -42,6 +42,10 @@ private slots:
 
     void on_pushButtonBD_clicked();
 
+    void on_pBback_clicked();
+
+    void on_pBNext_clicked();
+
 private:
     Ui::MainWindow *ui;
 };
