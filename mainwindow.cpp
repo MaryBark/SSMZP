@@ -85,10 +85,67 @@ MainWindow::MainWindow(QWidget *parent)
 
 
 
-    connectDataBase *db = new connectDataBase("mathDataBase.db");
+//    connectDataBase *db = new connectDataBase("mathDataBase.db");
+
+
+
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+
+      // Указание имени файла базы данных
+      db.setDatabaseName("mathDataBase.db");
+
+      // Открытие базы данных
+      if (!db.open())
+      {
+          qDebug() << "Не удалось открыть базу данных";
+  //        return -1;
+      }
+
+      // Создание таблицы
+      QSqlQuery query;
+      if (!query.exec("CREATE TABLE IF NOT EXISTS Gepotenzival111 (num INTEGER PRIMARY KEY, N DOUBLE PRECISION, M DOUBLE PRECISION, Cnm DOUBLE PRECISION, Dnm DOUBLE PRECISION)"))
+      {
+          qDebug() << "Не удалось создать таблицу";
+  //        return -1;
+      }
+
+      if (!query.exec("CREATE TABLE IF NOT EXISTS runge (num INTEGER PRIMARY KEY, X DOUBLE PRECISION, Y DOUBLE PRECISION, Z DOUBLE PRECISION, VX DOUBLE PRECISION, VY DOUBLE PRECISION, VZ DOUBLE PRECISION)"))
+      {
+          qDebug() << "Не удалось создать таблицу";
+  //        return -1;
+      }
+
+
+//      // Добавление записи в таблицу
+//      if (!query.exec("INSERT INTO Gepotenzival111 (num, N, M, Cnm, Dnm) VALUES (1 , 1, 1, 56, 76)"))
+//      {
+//          qDebug() << "Не удалось добавить запись в таблицу";
+//      }
+
+
+      query.prepare("INSERT INTO Gepotenzival111 (num, N, M, Cnm, Dnm) "
+                  "VALUES (:num, :N, :Mm :Cnm, :Dnm)");
+      for (int i=0; i<2557; i++) {
+          query.bindValue(":num", 1);
+          query.bindValue(":N", GeoPotenzivalEarth_9002[(0) * 4 + 1]);
+          query.bindValue(":M", GeoPotenzivalEarth_9002[(0) * 4 + 2]);
+          query.bindValue(":Cnm", GeoPotenzivalEarth_9002[(0) * 4 + 3]);
+          query.bindValue(":Dnm", GeoPotenzivalEarth_9002[(0) * 4 + 4]);
+          query.exec();
+      }
+
+      // Выборка данных из таблицы
+      if (!query.exec("SELECT * FROM Gepotenzival111"))
+      {
+          qDebug() << "Не удалось выбрать данные из таблицы";
+  //        return -1;
+      }
+
+
+
 
     QSqlTableModel *model = new QSqlTableModel(this, QSqlDatabase::database());
-    model->setTable("erty");
+    model->setTable("Gepotenzival111");
     model->setEditStrategy(QSqlTableModel::OnManualSubmit);
     model->select();
     //        model->setHeaderData(0, Qt::Horizontal, tr("Name"));
