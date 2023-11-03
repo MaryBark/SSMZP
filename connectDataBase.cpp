@@ -26,17 +26,74 @@ connectDataBase::connectDataBase(const QString& dataBase)
     }
 
 //    QSqlQuery query;
-    query.prepare("INSERT INTO Geo (num, N, M, Cnm, Dnm) "
-                "VALUES (:num, :N, :Mm :Cnm, :Dnm)");
-    for (int i=0; i<2557; i++) {
-        query.bindValue(":num", 1);
-        query.bindValue(":N", GeoPotenzivalEarth_9002[(0) * 4 + 1]);
-        query.bindValue(":M", GeoPotenzivalEarth_9002[(0) * 4 + 2]);
-        query.bindValue(":Cnm", GeoPotenzivalEarth_9002[(0) * 4 + 3]);
-        query.bindValue(":Dnm", GeoPotenzivalEarth_9002[(0) * 4 + 4]);
-        query.exec();
+//    query.prepare("INSERT INTO Geo (num, N, M, Cnm, Dnm) "
+//                "VALUES (:num, :N, :Mm :Cnm, :Dnm)");
+//    for (int i=0; i<2557; i++) {
+//        query.bindValue(":num", 1);
+//        query.bindValue(":N", GeoPotenzivalEarth_9002[(0) * 4 + 1]);
+//        query.bindValue(":M", GeoPotenzivalEarth_9002[(0) * 4 + 2]);
+//        query.bindValue(":Cnm", GeoPotenzivalEarth_9002[(0) * 4 + 3]);
+//        query.bindValue(":Dnm", GeoPotenzivalEarth_9002[(0) * 4 + 4]);
+//        query.exec();
+//    }
+
+
+
+    QSqlQuery query1;
+    query1.exec("CREATE TABLE IF NOT EXISTS Geopot (num INTEGER PRIMARY KEY, n DOUBLE PRECISION, m DOUBLE PRECISION, Cnm DOUBLE PRECISION, Dnm DOUBLE PRECISION)");
+
+    int rows = 2557; // количество строк в массиве
+    int columns = 5; // количество столбцов в массиве
+//    int array[rows][columns]; // инициализация и заполнение массива данными
+
+
+    // цикл для записи данных из массива в таблицу
+    for (int i = 0; i < rows; i++) {
+//        for (int j = 0; j < columns; j++) {
+//            array[i][j] = i+34;
+            // формирование запроса на вставку данных в таблицу
+            QString sql = "INSERT INTO Geopot (num, n, m, Cnm, Dnm) VALUES (:num, :n, :m, :Cnm, :Dnm)";
+            query1.prepare(sql);
+            query1.bindValue(":num", i+1);
+            query1.bindValue(":n", GeoPotenzivalEarth_9002[(i) * 4 + 1]);
+            query1.bindValue(":m", GeoPotenzivalEarth_9002[(i) * 4 + 2]);
+            query1.bindValue(":Cnm", GeoPotenzivalEarth_9002[(i) * 4 + 3]);
+            query1.bindValue(":Dnm", GeoPotenzivalEarth_9002[(i) * 4 + 4]);
+            // выполнение запроса
+            if (!query1.exec()) {
+                qDebug() << "Error executing query: " << query.lastError();
+            }
+//        }
     }
 
+
+
+//    for (int i=0; i<2557; i++)
+//    {
+//        array[i][0] = i+1;
+//        array[i][1] = GeoPotenzivalEarth_9002[(0) * 4 + 1];
+//        array[i][2] = GeoPotenzivalEarth_9002[(0) * 4 + 2];
+//        array[i][3] = GeoPotenzivalEarth_9002[(0) * 4 + 3];
+//        array[i][4] = GeoPotenzivalEarth_9002[(0) * 4 + 4];
+//    }
+
+//    // цикл для записи данных из массива в таблицу
+//    for (int i = 0; i < rows; i++) {
+//        for (int j = 0; j < columns; j++) {
+////            array[i][j] = i+34;
+//            // формирование запроса на вставку данных в таблицу
+//            QString sql = "INSERT INTO Geopot (num, n, m, Cnm, Dnm) VALUES (:num, :n, :m, :Cnm, :Dnm)";
+//            query1.prepare(sql);
+//            query1.bindValue(":n", array[i][j]);
+//            query1.bindValue(":m", array[i][j]);
+//            query1.bindValue(":Cnm", array[i][j]);
+//            query1.bindValue(":Dnm", array[i][j]);
+//            // выполнение запроса
+//            if (!query1.exec()) {
+//                qDebug() << "Error executing query: " << query.lastError();
+//            }
+//        }
+//    }
 
 
 

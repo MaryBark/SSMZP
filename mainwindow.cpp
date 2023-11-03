@@ -10,6 +10,7 @@
 #include "settingsTreeView.h"
 #include "settingsTreeItem.h"
 #include "connectDataBase.h"
+#include <QSqlError>
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -84,77 +85,85 @@ MainWindow::MainWindow(QWidget *parent)
 
 
 
-
-//    connectDataBase *db = new connectDataBase("mathDataBase.db");
-
-
-
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
-
-      // Указание имени файла базы данных
-      db.setDatabaseName("mathDataBase.db");
-
-      // Открытие базы данных
-      if (!db.open())
-      {
-          qDebug() << "Не удалось открыть базу данных";
-  //        return -1;
-      }
-
-      // Создание таблицы
-      QSqlQuery query;
-      if (!query.exec("CREATE TABLE IF NOT EXISTS Gepotenzival111 (num INTEGER PRIMARY KEY, N DOUBLE PRECISION, M DOUBLE PRECISION, Cnm DOUBLE PRECISION, Dnm DOUBLE PRECISION)"))
-      {
-          qDebug() << "Не удалось создать таблицу";
-  //        return -1;
-      }
-
-      if (!query.exec("CREATE TABLE IF NOT EXISTS runge (num INTEGER PRIMARY KEY, X DOUBLE PRECISION, Y DOUBLE PRECISION, Z DOUBLE PRECISION, VX DOUBLE PRECISION, VY DOUBLE PRECISION, VZ DOUBLE PRECISION)"))
-      {
-          qDebug() << "Не удалось создать таблицу";
-  //        return -1;
-      }
+    // добавляем записи в
+    connectDataBase *db = new connectDataBase("mathDataBase.db");
 
 
-//      // Добавление записи в таблицу
-//      if (!query.exec("INSERT INTO Gepotenzival111 (num, N, M, Cnm, Dnm) VALUES (1 , 1, 1, 56, 76)"))
+
+//    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+
+//      // Указание имени файла базы данных
+//      db.setDatabaseName("mathDataBase.db");
+
+//      // Открытие базы данных
+//      if (!db.open())
 //      {
-//          qDebug() << "Не удалось добавить запись в таблицу";
+//          qDebug() << "Не удалось открыть базу данных";
+//  //        return -1;
+//      }
+
+//      // Создание таблицы
+//      QSqlQuery query;
+//      if (!query.exec("CREATE TABLE IF NOT EXISTS Gepo (num INTEGER PRIMARY KEY, N DOUBLE PRECISION, M DOUBLE PRECISION, Cnm DOUBLE PRECISION, Dnm DOUBLE PRECISION)"))
+//      {
+//          qDebug() << "Не удалось создать таблицу";
+//  //        return -1;
+//      }
+
+//      if (!query.exec("CREATE TABLE IF NOT EXISTS runge (num INTEGER PRIMARY KEY, X DOUBLE PRECISION, Y DOUBLE PRECISION, Z DOUBLE PRECISION, VX DOUBLE PRECISION, VY DOUBLE PRECISION, VZ DOUBLE PRECISION)"))
+//      {
+//          qDebug() << "Не удалось создать таблицу";
+//  //        return -1;
 //      }
 
 
-      query.prepare("INSERT INTO Gepotenzival111 (num, N, M, Cnm, Dnm) "
-                  "VALUES (:num, :N, :Mm :Cnm, :Dnm)");
-      for (int i=0; i<2557; i++) {
-          query.bindValue(":num", 1);
-          query.bindValue(":N", GeoPotenzivalEarth_9002[(0) * 4 + 1]);
-          query.bindValue(":M", GeoPotenzivalEarth_9002[(0) * 4 + 2]);
-          query.bindValue(":Cnm", GeoPotenzivalEarth_9002[(0) * 4 + 3]);
-          query.bindValue(":Dnm", GeoPotenzivalEarth_9002[(0) * 4 + 4]);
-          query.exec();
-      }
+////      // Добавление записи в таблицу
+////      if (!query.exec("INSERT INTO Gepo (num, N, M, Cnm, Dnm) VALUES (1 , 1, 1, 56, 76)"))
+////      {
+////          qDebug() << "Не удалось добавить запись в таблицу";
+////      }
 
-      // Выборка данных из таблицы
-      if (!query.exec("SELECT * FROM Gepotenzival111"))
-      {
-          qDebug() << "Не удалось выбрать данные из таблицы";
-  //        return -1;
-      }
+
+
+//      for (int i=0; i<2557; i++) {
+//          query.prepare("INSERT INTO Gepo (num, N, M, Cnm, Dnm) "
+//                      "VALUES (:num, :N, :Mm, :Cnm, :Dnm)");
+//          query.bindValue(":num", 1);
+//          query.bindValue(":N", GeoPotenzivalEarth_9002[(0) * 4 + 1]);
+//          query.bindValue(":M", GeoPotenzivalEarth_9002[(0) * 4 + 2]);
+//          query.bindValue(":Cnm", GeoPotenzivalEarth_9002[(0) * 4 + 3]);
+//          query.bindValue(":Dnm", GeoPotenzivalEarth_9002[(0) * 4 + 4]);
+//          query.exec();
+//          if(!query.exec())
+//          {
+//          qDebug()<< query.lastError()/*.toString()*/;
+//          qDebug() << query.exec();
+//          }
+//      }
+
+//      // Выборка данных из таблицы
+//      if (!query.exec("SELECT * FROM Gepo"))
+//      {
+//          qDebug() << "Не удалось выбрать данные из таблицы";
+//  //        return -1;
+//      }
 
 
 
 
     QSqlTableModel *model = new QSqlTableModel(this, QSqlDatabase::database());
-    model->setTable("Gepotenzival111");
+    QString tableName = "Geopot";//"mytable"/*Geo*/;
+    model->setTable(tableName);
     model->setEditStrategy(QSqlTableModel::OnManualSubmit);
     model->select();
     //        model->setHeaderData(0, Qt::Horizontal, tr("Name"));
     //        model->setHeaderData(1, Qt::Horizontal, tr("Salary"));
-    ui->tableView_3->setModel(model);
+    ui->tableViewGeo->setModel(model);
+    ui->labelGeo->setText(tableName);
 
 
     DatabaseDelegate* delegate = new DatabaseDelegate;
-    ui->tableView_3->setItemDelegateForColumn(5, delegate);
+    ui->tableViewGeo->setItemDelegateForColumn(5, delegate);
 }
 
 MainWindow::~MainWindow()
