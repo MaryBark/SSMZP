@@ -73,7 +73,6 @@ MainWindow::MainWindow(QWidget *parent)
     modelStdItem.appendRow(setting2);
 
     // Установка модели данных для QTreeView
-    // Установка модели данных для QTreeView
     treeView.setModel(&modelStdItem);
 
     // Установка делегата для второй колонки
@@ -83,85 +82,19 @@ MainWindow::MainWindow(QWidget *parent)
     treeView.show();
     ui->horizontalLayout_5->addWidget(&treeView);
 
-
-
-    // добавляем записи в
+    // добавляем записи в базу данных
     connectDataBase *db = new connectDataBase("mathDataBase.db");
 
-
-
-//    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
-
-//      // Указание имени файла базы данных
-//      db.setDatabaseName("mathDataBase.db");
-
-//      // Открытие базы данных
-//      if (!db.open())
-//      {
-//          qDebug() << "Не удалось открыть базу данных";
-//  //        return -1;
-//      }
-
-//      // Создание таблицы
-//      QSqlQuery query;
-//      if (!query.exec("CREATE TABLE IF NOT EXISTS Gepo (num INTEGER PRIMARY KEY, N DOUBLE PRECISION, M DOUBLE PRECISION, Cnm DOUBLE PRECISION, Dnm DOUBLE PRECISION)"))
-//      {
-//          qDebug() << "Не удалось создать таблицу";
-//  //        return -1;
-//      }
-
-//      if (!query.exec("CREATE TABLE IF NOT EXISTS runge (num INTEGER PRIMARY KEY, X DOUBLE PRECISION, Y DOUBLE PRECISION, Z DOUBLE PRECISION, VX DOUBLE PRECISION, VY DOUBLE PRECISION, VZ DOUBLE PRECISION)"))
-//      {
-//          qDebug() << "Не удалось создать таблицу";
-//  //        return -1;
-//      }
-
-
-////      // Добавление записи в таблицу
-////      if (!query.exec("INSERT INTO Gepo (num, N, M, Cnm, Dnm) VALUES (1 , 1, 1, 56, 76)"))
-////      {
-////          qDebug() << "Не удалось добавить запись в таблицу";
-////      }
-
-
-
-//      for (int i=0; i<2557; i++) {
-//          query.prepare("INSERT INTO Gepo (num, N, M, Cnm, Dnm) "
-//                      "VALUES (:num, :N, :Mm, :Cnm, :Dnm)");
-//          query.bindValue(":num", 1);
-//          query.bindValue(":N", GeoPotenzivalEarth_9002[(0) * 4 + 1]);
-//          query.bindValue(":M", GeoPotenzivalEarth_9002[(0) * 4 + 2]);
-//          query.bindValue(":Cnm", GeoPotenzivalEarth_9002[(0) * 4 + 3]);
-//          query.bindValue(":Dnm", GeoPotenzivalEarth_9002[(0) * 4 + 4]);
-//          query.exec();
-//          if(!query.exec())
-//          {
-//          qDebug()<< query.lastError()/*.toString()*/;
-//          qDebug() << query.exec();
-//          }
-//      }
-
-//      // Выборка данных из таблицы
-//      if (!query.exec("SELECT * FROM Gepo"))
-//      {
-//          qDebug() << "Не удалось выбрать данные из таблицы";
-//  //        return -1;
-//      }
-
-
-
-
+    // Добавляем таблицу базы данных на на форму
     QSqlTableModel *model = new QSqlTableModel(this, QSqlDatabase::database());
     QString tableName = "Geopot";//"mytable"/*Geo*/;
     model->setTable(tableName);
     model->setEditStrategy(QSqlTableModel::OnManualSubmit);
     model->select();
-    //        model->setHeaderData(0, Qt::Horizontal, tr("Name"));
-    //        model->setHeaderData(1, Qt::Horizontal, tr("Salary"));
     ui->tableViewGeo->setModel(model);
     ui->labelGeo->setText(tableName);
 
-
+    // делегат для изменения значения в таблице базы данных
     DatabaseDelegate* delegate = new DatabaseDelegate;
     ui->tableViewGeo->setItemDelegateForColumn(5, delegate);
 }
@@ -215,7 +148,6 @@ void MainWindow::on_pushButtonBD_clicked()
 void MainWindow::on_pBback_clicked()
 {
     ui->stackedWidget_2->setCurrentIndex(ui->stackedWidget_2->currentIndex() - 1);
-
 }
 
 void MainWindow::on_pBNext_clicked()
