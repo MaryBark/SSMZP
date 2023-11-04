@@ -28,6 +28,27 @@ connectDataBase::connectDataBase(const QString& dataBase)
     QSqlQuery query1;
     query1.exec("CREATE TABLE IF NOT EXISTS Geopot (num INTEGER PRIMARY KEY, n DOUBLE PRECISION, m DOUBLE PRECISION, Cnm DOUBLE PRECISION, Dnm DOUBLE PRECISION)");
 
+    QStringList tables = db.tables();
+    bool tableExists = tables.contains("Geopot");
+    if( !tableExists)
+    {
+        return;
+    }
+
+    bool tableIsEmpty = true;
+    if (tableExists)
+    {
+        QSqlQuery query;
+        query.prepare("SELECT COUNT(*) FROM имя_таблицы");
+        if (query.exec() && query.next())
+        {
+            int count = query.value(0).toInt();
+            tableIsEmpty = (count == 0);
+        }
+    }
+
+    if(tableIsEmpty)
+    {
     int rows = 2557; // количество строк в массиве
     // цикл для записи данных из массива в таблицу
     for (int i = 0; i < rows; i++) {
@@ -46,6 +67,7 @@ connectDataBase::connectDataBase(const QString& dataBase)
             }
     }
 
+    }
     // Выборка данных из таблицы
     if (!query.exec("SELECT * FROM Geo"))
     {

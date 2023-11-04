@@ -8,13 +8,20 @@
 
 #include <QStyledItemDelegate>
 #include <QLineEdit>
+#include <QObject>
 
 
-class connectDataBase
+class connectDataBase : public QObject
 {
+    Q_OBJECT
 public:
     connectDataBase(const QString& dataBase);
 
+public slots:
+    void run()
+    {
+        // чего сюда сувать хз
+    }
 
 private:
     QSqlDatabase db;

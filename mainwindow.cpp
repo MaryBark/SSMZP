@@ -11,6 +11,7 @@
 #include "settingsTreeItem.h"
 #include "connectDataBase.h"
 #include <QSqlError>
+#include <QThread>
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -37,6 +38,7 @@ MainWindow::MainWindow(QWidget *parent)
     vector</*coordVectorXYZ<*/double/*>*/> coord;
     coord = MapMarbleTrassa::buildingRouteKAXYZ1();
 
+    // нахрена вот это надо уже не помню....
     QList<stateVectorShell> * values = new QList<stateVectorShell>;
     for(int i = 1; i < coord.size(); i++)
     {
@@ -97,6 +99,14 @@ MainWindow::MainWindow(QWidget *parent)
     // делегат для изменения значения в таблице базы данных
     DatabaseDelegate* delegate = new DatabaseDelegate;
     ui->tableViewGeo->setItemDelegateForColumn(5, delegate);
+
+    // раздаем классам потоки
+    QThread tread1;
+    QThread tread2;
+
+    db->moveToThread(&tread1);
+
+//    connect(&tread1, &QThread::started, &db, &connectDataBase::run);
 }
 
 MainWindow::~MainWindow()
