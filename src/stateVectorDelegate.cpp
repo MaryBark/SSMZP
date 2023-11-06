@@ -1,4 +1,4 @@
-#include "stateVectorDelegate.h"
+#include "inc/stateVectorDelegate.h"
 #include "math.h"
 
 //#include <QPainter>

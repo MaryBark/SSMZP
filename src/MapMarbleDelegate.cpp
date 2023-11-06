@@ -1,4 +1,4 @@
-#include "MapMarbleDelegate.h"
+#include "inc/MapMarbleDelegate.h"
 #include <QPainter>
 #include <QDebug>
 

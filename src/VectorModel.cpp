@@ -1,4 +1,4 @@
-#include "VectorModel.h"
+#include "inc/VectorModel.h"
 
 VectorModel::VectorModel(QObject *parent) :
    QAbstractTableModel(parent)

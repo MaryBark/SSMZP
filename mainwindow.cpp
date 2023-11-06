@@ -1,15 +1,15 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
 
-#include "stateVectorModel.h"
-#include "mathModelSpacecraft.h"
-#include "MapMarbleTrassa.h"
-#include "stateVectorDelegate.h"
+#include "inc/stateVectorModel.h"
+#include "inc/mathModelSpacecraft.h"
+#include "inc/MapMarbleTrassa.h"
+#include "inc/stateVectorDelegate.h"
 #include <QStandardItemModel>
-#include "MapSettings.h"
-#include "settingsTreeView.h"
-#include "settingsTreeItem.h"
-#include "connectDataBase.h"
+#include "inc/MapSettings.h"
+#include "inc/settingsTreeView.h"
+#include "inc/settingsTreeItem.h"
+#include "inc/connectDataBase.h"
 #include <QSqlError>
 #include <QThread>
 
@@ -28,8 +28,8 @@ MainWindow::MainWindow(QWidget *parent)
     layot->addWidget(mapWidget);
     ui->lwidget->setLayout(layot);
 
-    ui->pBback->setIcon(QIcon("left-arrow.png"));
-    ui->pBNext->setIcon(QIcon("right-arrow.png"));
+    ui->pBback->setIcon(QIcon("://left-arrow.png"));
+    ui->pBNext->setIcon(QIcon("://right-arrow.png"));
 
     // убирвем стирекы таба
      ui->tabWidget->tabBar()->hide();

@@ -1,4 +1,4 @@
-#include "settingsTreeView.h"
+#include "inc/settingsTreeView.h"
 
 //settingsTreeView::settingsTreeView(QList< QWidget *> lstwgt, QObject *parent):
 //           _lstWGT(lstwgt), QAbstractItemModel(parent)

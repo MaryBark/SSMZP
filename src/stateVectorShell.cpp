@@ -1,4 +1,4 @@
-#include "stateVectorShell.h"
+#include "inc/stateVectorShell.h"
 
 stateVectorShell::stateVectorShell():
     m_dt(QDateTime()), m_X(0.0), m_Y(0.0), m_Z(0.0), m_VX(0.0), m_VY(0.0), m_VZ(0.0)

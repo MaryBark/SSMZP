@@ -1,4 +1,4 @@
-#include "mathModelSpacecraft.h"
+#include "inc/mathModelSpacecraft.h"
 
 mathModelSpacecraft::mathModelSpacecraft(QObject *parent) :
     QAbstractItemModel(parent)

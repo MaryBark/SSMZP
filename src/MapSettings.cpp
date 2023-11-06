@@ -1,4 +1,4 @@
-#include "MapSettings.h"
+#include "inc/MapSettings.h"
 #include "ui_MapSettings.h"
 
 MapSettings::MapSettings(QWidget *parent) :

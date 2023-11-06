@@ -1,4 +1,4 @@
-#include "MapMarbleTrassa.h"
+#include "inc/MapMarbleTrassa.h"
 
 #include <math.h>
 #include <QByteArray>

@@ -1,6 +1,6 @@
-#include "connectDataBase.h"
+#include "inc/connectDataBase.h"
 
-#include "PZ_90_02.h"
+#include "inc/PZ_90_02.h"
 
 
 connectDataBase::connectDataBase(const QString& dataBase)
@@ -49,25 +49,26 @@ connectDataBase::connectDataBase(const QString& dataBase)
 
     if(tableIsEmpty)
     {
-    int rows = 2557; // количество строк в массиве
-    // цикл для записи данных из массива в таблицу
-    for (int i = 0; i < rows; i++) {
-
+        int rows = 2557; // количество строк в массиве
+        // цикл для записи данных из массива в таблицу
+        for (int i = 0; i < rows; i++)
+        {
             // формирование запроса на вставку данных в таблицу
             QString sql = "INSERT INTO Geopot (num, n, m, Cnm, Dnm) VALUES (:num, :n, :m, :Cnm, :Dnm)";
             query1.prepare(sql);
             query1.bindValue(":num", i+1);
-            query1.bindValue(":n", GeoPotenzivalEarth_9002[(i) * 4 + 1]);
-            query1.bindValue(":m", GeoPotenzivalEarth_9002[(i) * 4 + 2]);
-            query1.bindValue(":Cnm", GeoPotenzivalEarth_9002[(i) * 4 + 3]);
-            query1.bindValue(":Dnm", GeoPotenzivalEarth_9002[(i) * 4 + 4]);
+            query1.bindValue(":n", GeoPotenzivalEarth_9002[(i) * 4 ]);
+            query1.bindValue(":m", GeoPotenzivalEarth_9002[(i) * 4 + 1]);
+            query1.bindValue(":Cnm", GeoPotenzivalEarth_9002[(i) * 4 + 2]);
+            query1.bindValue(":Dnm", GeoPotenzivalEarth_9002[(i) * 4 + 3]);
             // выполнение запроса
-            if (!query1.exec()) {
+            if (!query1.exec())
+            {
                 qDebug() << "Error executing query: " << query.lastError();
             }
+        }
     }
 
-    }
     // Выборка данных из таблицы
     if (!query.exec("SELECT * FROM Geo"))
     {

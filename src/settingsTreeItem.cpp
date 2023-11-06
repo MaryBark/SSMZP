@@ -1,4 +1,4 @@
-#include "settingsTreeItem.h"
+#include "inc/settingsTreeItem.h"
 
 //settingsTreeItem::settingsTreeItem()
 //{

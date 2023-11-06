@@ -30,22 +30,23 @@ set(PROJECT_SOURCES
         mainwindow.cpp
         mainwindow.h
         mainwindow.ui
-        stateVectorModel.h stateVectorModel.cpp
-        mathModelSpacecraft.h mathModelSpacecraft.cpp
-        MapMarbleTrassa.h MapMarbleTrassa.cpp
-        coordinateVectors.h coordinateVectors.cpp
-        definitions.h
-        xyz2blh.h xyz2blh.cpp
-        TMicsellFunction.h TMicsellFunction.cpp
-        stateVectorShell.h stateVectorShell.cpp
-        stateVectorDelegate.h stateVectorDelegate.cpp
-        VectorModel.h VectorModel.cpp
-        MapSettings.h MapSettings.cpp MapSettings.ui
-        settingsTreeView.h settingsTreeView.cpp
-        settingsTreeItem.h settingsTreeItem.cpp
-        MapMarbleDelegate.h MapMarbleDelegate.cpp
-        connectDataBase.h connectDataBase.cpp
-        PZ_90_02.h
+        inc/stateVectorModel.h src/stateVectorModel.cpp
+        inc/mathModelSpacecraft.h src/mathModelSpacecraft.cpp
+        inc/MapMarbleTrassa.h src/MapMarbleTrassa.cpp
+        inc/coordinateVectors.h src/coordinateVectors.cpp
+        inc/definitions.h
+        inc/xyz2blh.h src/xyz2blh.cpp
+        inc/TMicsellFunction.h src/TMicsellFunction.cpp
+        inc/stateVectorShell.h src/stateVectorShell.cpp
+        inc/stateVectorDelegate.h src/stateVectorDelegate.cpp
+        inc/VectorModel.h src/VectorModel.cpp
+        inc/MapSettings.h src/MapSettings.cpp src/MapSettings.ui
+        inc/settingsTreeView.h src/settingsTreeView.cpp
+        inc/settingsTreeItem.h src/settingsTreeItem.cpp
+        inc/MapMarbleDelegate.h src/MapMarbleDelegate.cpp
+        inc/connectDataBase.h src/connectDataBase.cpp
+        inc/PZ_90_02.h
+        res/resourse.qrc
 #        MathModelOld.h MathModelOld.cpp
 )
 

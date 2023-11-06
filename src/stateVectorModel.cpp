@@ -1,4 +1,4 @@
-#include "stateVectorModel.h"
+#include "inc/stateVectorModel.h"
 
 #include <QDateTime>
 #include <QFont>
@@ -96,7 +96,7 @@ QVariant stateVectorModel::data(const QModelIndex &index, int role) const
             else
             {
                 if((index.column() == 0)) // а
-                    return QIcon("plus.png");
+                    return QIcon("://plus.png");
             }
 
 //        if(index.column() == 1) // а
@@ -168,17 +168,17 @@ QVariant stateVectorModel::headerData(int section, Qt::Orientation orientation, 
                     case 0:
                         return QString("Time");
                     case 1:
-                        return QIcon("semimajor.png");
+                        return QIcon("://semimajor.png");
                     case 2:
-                        return QIcon("inclination.png");
+                        return QIcon("://inclination.png");
                     case 3:
-                        return QIcon("eccentricity.png");
+                        return QIcon("://eccentricity.png");
                     case 4:
-                        return QIcon("Longitude_of_the_ascending_node.png");
+                        return QIcon("://Longitude_of_the_ascending_node.png");
                     case 5:
-                        return QIcon("The_pericenter_argument.png");
+                        return QIcon("://The_pericenter_argument.png");
                     case 6:
-                        return QIcon("Average_anomaly.png");
+                        return QIcon("://Average_anomaly.png");
                     default:
                         return QVariant();
                 }

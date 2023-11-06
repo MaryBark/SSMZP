@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QPen>
+//#include "ssrc/MapSettings.ui"
 
 namespace Ui {
 class MapSettings;

@@ -46,7 +46,7 @@ QPushButton:default {
 /**************  QLineEdit  *******************/
 
 QCheckBox {
-    color: #FFFFFF;
+    color: #000000;
     font-family: "UKIJ Teng";
 }
     
@@ -102,7 +102,7 @@ QMenu::separator {
 /**************  QRadioButton  *******************/
 
 QRadioButton {
-    color: #FFFFFF;
+    color: #000000;
 }
 
 QRadioButton::indicator
@@ -120,7 +120,7 @@ QSpinBox {
     background-color: #666666;	
     selection-background-color: #abaaab;
     selection-color: black;
-    color: #FFFFFF;
+    color: #000000;
     border: 1px solid;
     border-radius: 3px;
     border-color: #CC6600;
@@ -259,7 +259,7 @@ QGroupBox {
     border: 1px solid;
     border-width: 1px;
     border-radius: 3px;
-    border-color: #FFFFFF;
+    border-color: #000000;
     padding-top: 22px;
 }
 
@@ -270,7 +270,7 @@ QFrame {
     background-color: #E6E6FA;
     border: 1px solid;
     border-radius: 0px;
-    border-color: #FFFFFF;
+    border-color: #000000;
 }
 
 QFrame#stackedWidget {
@@ -316,13 +316,13 @@ QTabBar::tab {
 
 QTabBar::tab:hover {
     background: #ABAAAB;
-    color: #FFFFFF;
+    color: #000000;
 }
 
 QTabBar::tab:selected
  {
     background: #E6E6FA;
-    color: #FFFFFF;
+    color: #000000;
 }
 
 QTabBar::tab:selected {
@@ -342,11 +342,11 @@ QTableView QTableCornerButton::section {
 }
 
 QTableView {
-    color: #FFFFFF; 
+    color: #000000; 
     gridline-color: #CC6600;
     background-color: #E0FFFF; 
     selection-background-color: #888888;
-    border: 1px groove #FFFFFF;
+    border: 1px groove #000000;
     border-radius: 3px;
 }
 

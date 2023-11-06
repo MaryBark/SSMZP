@@ -1,7 +1,7 @@
 #ifndef TMicsellFunction_CPP
 #define TMicsellFunction_CPP
 
-#include "TMicsellFunction.h"
+#include "inc/TMicsellFunction.h"
 
 
 double TMicsellFunction::radians(double degrees)

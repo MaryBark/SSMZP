@@ -1,4 +1,4 @@
-#include "coordinateVectors.h"
+#include "inc/coordinateVectors.h"
 
 //coordinateVectors::coordinateVectors()
 //{

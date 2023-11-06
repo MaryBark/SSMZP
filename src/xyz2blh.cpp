@@ -1,4 +1,4 @@
-#include "xyz2blh.h"
+#include "inc/xyz2blh.h"
 
 //xyz2blh::xyz2blh()
 //{

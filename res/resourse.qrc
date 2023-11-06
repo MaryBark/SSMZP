@@ -1,0 +1,14 @@
+<RCC>
+    <qresource prefix="/">
+        <file>Average_anomaly.png</file>
+        <file>Longitude_of_the_ascending_node.png</file>
+        <file>The_pericenter_argument.png</file>
+        <file>eccentricity.png</file>
+        <file>free-icon-momentum-164402.png</file>
+        <file>inclination.png</file>
+        <file>left-arrow.png</file>
+        <file>plus.png</file>
+        <file>right-arrow.png</file>
+        <file>semimajor.png</file>
+    </qresource>
+</RCC>
