@@ -10,5 +10,6 @@
         <file>plus.png</file>
         <file>right-arrow.png</file>
         <file>semimajor.png</file>
+        <file>styles.css</file>
     </qresource>
 </RCC>

@@ -10,7 +10,7 @@ int main(int argc, char *argv[])
 
     // загрузка файла стилей
     QFile styleF;
-    styleF.setFileName("styles.css");
+    styleF.setFileName("://styles.css");
     if(styleF.open(QFile::ReadOnly))
     {
         QString qssStr = styleF.readAll();

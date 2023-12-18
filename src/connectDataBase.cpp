@@ -69,12 +69,12 @@ connectDataBase::connectDataBase(const QString& dataBase)
         }
     }
 
-    // Выборка данных из таблицы
-    if (!query.exec("SELECT * FROM Geo"))
-    {
-        qDebug() << "Не удалось выбрать данные из таблицы";
-//        return -1;
-    }
+//    // Выборка данных из таблицы
+//    if (!query.exec("SELECT * FROM Geo"))
+//    {
+//        qDebug() << "Не удалось выбрать данные из таблицы";
+////        return -1;
+//    }
 
     // Закрытие базы данных
     db.close();

@@ -49,7 +49,7 @@ set(PROJECT_SOURCES
         res/resourse.qrc
 #        MathModelOld.h MathModelOld.cpp
 #        StackedWidgetCharts.h StackedWidgetCharts.cpp StackedWidgetCharts.ui
-        SWcharts.h SWcharts.cpp SWcharts.ui
+        inc/SWcharts.h src/SWcharts.cpp src/SWcharts.ui
         inc/qcustomplot.h src/qcustomplot.cpp
 )
 

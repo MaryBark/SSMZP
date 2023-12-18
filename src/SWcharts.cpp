@@ -1,4 +1,4 @@
-#include "SWcharts.h"
+#include "inc/SWcharts.h"
 #include "ui_SWcharts.h"
 #include "inc/qcustomplot.h"
 #include <QPen>
