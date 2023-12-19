@@ -49,8 +49,9 @@ set(PROJECT_SOURCES
         res/resourse.qrc
 #        MathModelOld.h MathModelOld.cpp
 #        StackedWidgetCharts.h StackedWidgetCharts.cpp StackedWidgetCharts.ui
-        inc/SWcharts.h src/SWcharts.cpp src/SWcharts.ui
-        inc/qcustomplot.h src/qcustomplot.cpp
+        inc/chartEstimate/SWcharts.h src/chartEstimate/SWcharts.cpp src/chartEstimate/SWcharts.ui
+        inc/chartEstimate/qcustomplot.h src/chartEstimate/qcustomplot.cpp
+        inc/scan/scanMethod.h src/scan/scanMethod.cpp
 )
 
 message("PROJECT_SOURCES")

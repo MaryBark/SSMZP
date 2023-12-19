@@ -10,7 +10,7 @@
 #include "inc/settingsTreeView.h"
 #include "inc/settingsTreeItem.h"
 #include "inc/connectDataBase.h"
-#include "inc/SWcharts.h"
+#include "inc/chartEstimate/SWcharts.h"
 #include <QSqlError>
 #include <QThread>
 
@@ -168,7 +168,7 @@ void MainWindow::on_pBNext_clicked()
 
 void MainWindow::on_pushButton_7_clicked()
 {
-    SWcharts *chart = new SWcharts;
-    chart->show();
+//    SWcharts *chart = new SWcharts(dataCharts(QVector <double>(), QVector <double>()));
+//    chart->show();
 }
 
